@@ -143,7 +143,7 @@ curl.exe 'http://puzzled.chal.cybears.io:5000/puz_encode' -H 'Content-type: appl
 <br><br>So.. the first word came out at RRRBRR. Now I knew if something came out as a B, it would have been put in as a J. That means the 10th letter in '81 across' would appear as the 4th letter in the first row. In the .puz file we got though, it was meant to come out as a Y, which means I needed to have a G in the tenth place.</p>
         <p><img src='puz4.png'></p>
         <p>So, using my code, I worked out what the letters were for 81 across.. and that gave me the flag!</p>
- <code>  
+ <div class="code-box"><code>  
 curl.exe 'http://puzzled.chal.cybears.io:5000/puz_encode' -H 'Content-type: application/octet-stream' -H 'Origin: http://puzzled.chal.cybears.io:5000/' -H 'Puz-Code: 5442' -H 'Puz-Height: 20' -H 'Puz-Width: 23' --data-raw "JJJJJJ...........JJJJJJJ.....ZZZZZZZZZZZ.....Z.ZZZZZ...........JJJJJ..Z...JJJJJ...JJJJJ...Z..Z...Z...HHHHH...Z...Z..Z...Z...Z...Z...Z...Z..ZZZ.Z...Z...Z...Z.ZZZ.Z..ZZZ...Z...Z...ZZZ..ZZZZ.ITSNOTALLGHIDRA.ZZZZZZ.ZZZZZZ...ZZZZZZ.ZZZZZZ.Z.ZZZ.....ZZZ.Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.ZZ.Z.......Z.ZZ.ZZZZZZZ.JJJ.......JJJ.ZZZZZZZZZ..Z.JJJJJ.Z..ZZZZZZZZZZ..ZZZ...ZZZ..ZZZZZZZZZZZ...........ZZZZZZ" -v  --insecure 
 
   </code>
@@ -181,7 +181,12 @@ curl.exe 'http://puzzled.chal.cybears.io:5000/puz_encode' -H 'Content-type: appl
 
       
         <h2 id="eclipse">Total Eclipse of the Card</h2>
-        <p>boop</p>
+        <p>When I first saw the black cards on the banner my mind instantly went to braille or the standard galatic alphabet (if you know what that is)..</p>
+        <p><img src='eclipse0.png'></p>
+        <p>When comparing all the cards I saw that they were in the middle of the top and bottom for all of them, JUST LIKE THE CLASS/RACE/CATEGORY SPACES ON THE OTHER CARDS! I straight away knew what to do:</p>
+        <p><img src='eclipse1.png'></p>
+        <p>Slightly annoying due to the angle of my photos, but i got all the correct letters rah rah. I put them underneath and it didn't spell anything out, until I realised that the Lighting Bow appeared three times, and had three letters.. The wolfy face had 2 letters and appeared twice. Then I figured the EAICSFANYPTT wasn't quite right.. the front looked like EPIC though.. what if I swapped the Nuclear Symbols letters.. sure enough that spelt epic. I swapped a few more and got EPICTFANTASY.. that must be close.. but that T looks out of place, unless it's a reference I'm not getting like James <b>T</b> Kirk. After I figured it out I asked the author what the T was for.. he said it's because it's epi<b>CTF</b>antasy. I felt like smacking him in the face, but couldn't because he was also my ride home. 
+        <p><img src='eclipse2.png'></p>
       
     </div>
 </body>
