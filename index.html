@@ -106,7 +106,7 @@
     <div class="container">
         <p align='center'><img src="idkwhatdo.png" alt="WhatDo Image"></p>
         <h1>Panda's Writeups</h1>
-        <p>Some bsides 24 writeups done by a noob who has only used a computer once before.</p>
+        <p>Some write ups for the CTF challenges I did at BSides CBR 2024. My last years write ups are here: <a href='https://quokkanix.github.io/cybears2023/'><b>here</b></a></p>
 
         <h2 id="puzzled">Puzzled</h2>
         <p>This one brought back flashbacks of last year's crossword puzzle. It quickly became apparant that it wasn't the same style though because 1) It was in the rev section, and 2) some of the clues made zero sense and there was no way to get some of them anyway, as the letters had no clue attached</p>
@@ -153,9 +153,19 @@ curl.exe 'http://puzzled.chal.cybears.io:5000/puz_encode' -H 'Content-type: appl
     
         
         <h2 id="fruity">A Fruity Dillema</h2>
-        <p>boop</p>
+        <p>First things first, I couldn't have done this without DG and Nappa so big shout out to those legends. First thing I did was open up the tar.gz given to us, and opened up the docker file:        </p>
+<p> <img src='fruit1.png'></p>
+        <p>So yeah, pretty big hint that it's something to do with mod proxy. I then looked into secret.php to see what the code actually was .. </p>
+        <p> <img src='fruit2.png'></p>
+        <p>Okay so I had to get secret.php to run.. but not run on my server, I needed the cybears copy to run.. but the .htaccess file wasn't letting it be opened by just any old schmuck</p>
+       <p> <img src='fruit3.png'></p>
+ <p>So what was I gonna do? Well, I read https://httpd.apache.org/docs/current/mod/mod_proxy.html but it wasn't that much help. I played around with the URL a bunch as well as headers. Only got 403 or 404 errors, one 400. Humm.. I wasn't making any progress until Nappa mentioned a guy called Orange from Taiwan .. so I googled Orange Taiwan Mod Proxy and got this: <a href='https://blog.orange.tw/posts/2024-08-confusion-attacks-en/'>https://blog.orange.tw/posts/2024-08-confusion-attacks-en/</a>. This HAD to it.. since the whole theme was mandarins VS oranges<br><br>I started reading through oranges write up. It was really awesome and I learned a heap.. and I found this: </p>
+ <p> <img src='fruit4.png'></p>
+<P>So with that I used I tried a few things and then this one which finally worked! http://afruitydillema.chal.cybears.io/secret.php%3ftest.php<br><Br>
+    The %3F in a URL is the URL-encoded representation of the ? character. It did the trick and I got the flag :)
 
-      
+
+        
         <h2 id="flagme">Flag Me Maybe</h2>
         <p>So this one, as soon as I opened it and i saw it was a gif of the maritime flag signally doober, I knew what to do. I opened the file up in photoshop so I could see it frame by frame. I was a little confused at first over the frames that had two people in them, but figured that was just for animation effects.<br><Br>I translated it all quite quickly except for two mistakes I was making<br><Br>1. I was including cybears in the flag (e.g. cybears{cybears_is_that_a...)<br>2. I had accidentally included an extra C at the end. So I kept trying to work out the meaning of it, not realising that it was part of the animation wrap to go at the beginning of the loop. I'm embarrased how long this one took me to get ...</p>
 <p> <img src='flagme.png'></p>
