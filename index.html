@@ -3,62 +3,74 @@
 <head>
     <title>Panda's Writeups</title>
     <style>
-        /* CSS to set a maximum page width and style fonts */
-        body {
-            font-family: Arial, sans-serif; /* Use a modern font */
-            background-color: #f0f0f0; /* Set background color to light gray */
-        }
-.monospaced {
-    font-family: "Courier New", Courier, monospace;
-  }
-        .container {
-            max-width: 1000px; /* Set the maximum width of the container */
-            margin: 0 auto; /* Center the container horizontally on the page */
-            padding: 20px; /* Add some padding to the container for spacing */
-            background-color: white; /* Set container background to white */
-            border: 1px solid #ddd; /* Add a subtle border */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a slight shadow */
-        }
+    /* CSS to set a maximum page width and style fonts */
+    body {
+        font-family: Arial, sans-serif; /* Use a modern font */
+        background-color: #f0f0f0; /* Set background color to light gray */
+    }
 
-        h1, h2 {
-            border-bottom: 2px solid #3498db; /* Add a blue line under headings */
-            padding-bottom: 10px; /* Add some spacing between the heading and line */
-        }
+    .monospaced {
+        font-family: "Courier New", Courier, monospace;
+    }
 
-        /* CSS to set max width and max height for images */
-        img {
-            max-width: 500px; /* Images will not exceed the width of their container */
-            max-height: 400px; /* Images will not exceed the height of their container */
-            width: auto; /* Ensure the aspect ratio is maintained */
-            height: auto; /* Ensure the aspect ratio is maintained */
-            display: block; /* Center align images */
-    margin: 0 auto; /* Center align images */
-        }
+    .container {
+        max-width: 1000px; /* Set the maximum width of the container */
+        margin: 0 auto; /* Center the container horizontally on the page */
+        padding: 20px; /* Add some padding to the container for spacing */
+        background-color: white; /* Set container background to white */
+        border: 1px solid #ddd; /* Add a subtle border */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a slight shadow */
+    }
 
-        /* CSS for the navigation menu */
-     
+    h1, h2 {
+        border-bottom: 2px solid #2ecc71; /* Add a green line under headings */
+        padding-bottom: 10px; /* Add some spacing between the heading and line */
+    }
 
- .nav-menu {
-            position: sticky;
-            bottom: 0;
-            background-color: #3498db;
-            padding: 10px;
-        }
-        .nav-menu ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        .nav-menu li {
-            display: inline;
-            margin-right: 10px;
-        }
-        .nav-menu a {
-            text-decoration: none;
-            color: #fff;
-        } #fff;
-}
-    </style>
+    /* CSS to set max width and max height for images */
+    img {
+        max-width: 500px; /* Images will not exceed the width of their container */
+        max-height: 400px; /* Images will not exceed the height of their container */
+        width: auto; /* Ensure the aspect ratio is maintained */
+        height: auto; /* Ensure the aspect ratio is maintained */
+        display: block; /* Center align images */
+        margin: 0 auto; /* Center align images */
+    }
+
+    /* CSS for the navigation menu */
+    .nav-menu {
+        position: sticky;
+        top: 0; /* Stick the navigation bar to the top */
+        background-color: #2ecc71; /* Change to green */
+        padding: 10px 20px; /* Add padding for a more balanced look */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a slight shadow */
+        z-index: 1000; /* Make sure the nav menu stays on top */
+    }
+
+    .nav-menu ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex; /* Use flexbox for even spacing */
+        justify-content: center; /* Center the navigation items */
+    }
+
+    .nav-menu li {
+        margin: 0 15px; /* Increase the margin to space out the links evenly */
+    }
+
+    .nav-menu a {
+        text-decoration: none;
+        color: #fff;
+        padding: 5px 10px; /* Add some padding around the links */
+        transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    }
+
+    .nav-menu a:hover {
+        background-color: #27ae60; /* Slightly darker green for hover effect */
+        border-radius: 4px; /* Add rounded corners on hover */
+    }
+</style>
 </head>
 <body> <div class="nav-menu">
         <ul>
