@@ -70,6 +70,24 @@
         background-color: #27ae60; /* Slightly darker green for hover effect */
         border-radius: 4px; /* Add rounded corners on hover */
     }
+/* Style for the code quote boxes */
+    .code-box {
+        background-color: #f5f5f5; /* Light grey background */
+        border-left: 4px solid #333; /* Dark grey border on the left */
+        padding: 10px 15px; /* Padding inside the box */
+        margin: 20px 0; /* Margin around the box */
+        font-family: "Courier New", Courier, monospace; /* Monospaced font */
+        color: #333; /* Dark grey text */
+        white-space: pre-wrap; /* Preserve whitespace and line breaks */
+        word-wrap: break-word; /* Allow long lines to wrap */
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Slight shadow for a raised effect */
+        border-radius: 5px; /* Rounded corners */
+    }
+
+    /* Optional: Add a bit more contrast for the code inside */
+    .code-box code {
+        color: #000; /* Make code text a bit darker */
+    }
 </style>
 </head>
 <body> <div class="nav-menu">
@@ -90,9 +108,46 @@
         <p>Some bsides 24 writeups done by a noob who has only used a computer once before.</p>
 
         <h2 id="puzzled">Puzzled</h2>
-        <p>boop</p>
+        <p>This one brought back flashbacks of last year's crossword puzzle. It quickly became apparant that it wasn't the same style though because 1) It was in the rev section, and 2) some of the clues made zero sense and there was no way to get some of them anyway, as the letters had no clue attached</p>
+        <p>Now I tried a bunch of stupid stuff so I won't list it all here, but I played around with other .puz scramblers, banged my head on a wall a bit, read through https://www.muppetlabs.com/~breadbox/txt/acre.html for too long, went to abuse the author but he was too nice, took some panadol for the headache this ctf gave me, then then I decided to jump on what one of my team mates was doing (dgl a super smart guy from melbourne who is 100 times leeter than me. He was playing with curl and stuff and I'll show you why.. </p>
+    <p><img src='puz1.png'><img src='puz2.png'></p>
+        <p>So the key is generated client side.. cool cool cool no doubt no doubt let's play with curl and throw shit at the wall and see what sticks</p>
+        <div class="code-box">
+    <code>
+curl.exe 'http://puzzled.chal.cybears.io:5000/puz_encode' -H 'Content-type: application/octet-stream' -H 'Origin: http://puzzled.chal.cybears.io:5000/' -H 'Puz-Code: 5442' -H 'Puz-Height: 4' -H 'Puz-Width: 4' --data-raw "ABCDABCDABCDABCD" -v  --insecure 
+    </code>
+</div>
+        <p>
+        That got me back UVSTUVSTVSTUVSTU. Now, I only used 4 different chars in what I sent, and they were all sequential. The chars I got back were sequentialish too. If I send all of one letter, I'd only get one letter back. 
+<br><Br>
+        I started getting an idea on how to solve it. I figured if I had the original puzzle, used the key and downloaded a scramble, it would give me the same .puz file as we had been given, right? Now, I already knew some of the right letters.. so I tried this:
+</p>
+        
+<div class="code-box">
+    <code>
+curl.exe 'http://puzzled.chal.cybears.io:5000/puz_encode' -H 'Content-type: application/octet-stream' -H 'Origin: http://puzzled.chal.cybears.io:5000/' -H 'Puz-Code: 5442' -H 'Puz-Height: 20' -H 'Puz-Width: 23' --data-raw "ABCDEF...........ZZZZZZZ.....ZZZZZZZZZZZ.....Z.ZZZZZ...........ZZZZZ..Z...ZZZZZ...ZZZZZ...Z..Z...Z...ZZZZZ...Z...Z..Z...Z...Z...Z...Z...Z..ZZZ.Z...Z...Z...Z.ZZZ.Z..ZZZ...Z...Z...ZZZ..ZZZZ.ZZZZZZZZZZZZZZZ.ZZZZZZ.ZZZZZZ...ZZZZZZ.ZZZZZZ.Z.ZZZ.....ZZZ.Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.ZZ.Z.......Z.ZZ.ZZZZZZZ.ZZZ.......ZZZ.ZZZZZZZZZ..Z.ZZZZZ.Z..ZZZZZZZZZZ..ZZZ...ZZZ..ZZZZZZZZZZZ...........ZZZZZZ" -v  --insecure 
+   </code>
+</div>
 
-      
+        <p>So, that got me back RRRRRR...........RRRRRRR.....RRRRRRRRRRR.....R.RRRRR...........RRRRR..R...RRRRR...RRRRR...R..R...R...RRRRR...R...R..R...R...R...R...R...R..RRR.R...R...R...R.RRR.R..RRR...R...T...RVR..RRRR.RRRRRRRRRRRURRR.XRRRRR.RRRRRR...RRRRRR.RRRRRR.R.RRR.....RRR.R.RRRRRR.R..R.......R..R.RRRRRR.R..R.......R..R.RRRRRR.R..R.......R..R.RRRRRR.R..R.......R..R.RRRRRR.RR.R.......R.RW.RRRRRRR.RRR.......RRR.RRRRRRRRR..R.RRRSR.R..RRRRRRRRRR..RRR...RRR..RRRRRRRRRRR...........RRRRRR* <br><Br>Zs became R's.. ABCDEF became STUVWX and put in different locations.. AND they matched what was in those spots in the .puz file given to us.. ok.. ok.. very good my dear watson! I knew what to do! I was a panda with a plan! A monkey on a mission! I went through and worked out what the whole alphabet would translate too.. if an A was in the original crossword, it would become an S and be placed somewhere else on the new one. I knew what letters would turn into! I started writing a key (The blue being what letter I went to put in, the red being what it turned into..</p>
+        <p><img src='puz3.png'></p>
+
+      <div class="code-box">
+    <code>  
+curl.exe 'http://puzzled.chal.cybears.io:5000/puz_encode' -H 'Content-type: application/octet-stream' -H 'Origin: http://puzzled.chal.cybears.io:5000/' -H 'Puz-Code: 5442' -H 'Puz-Height: 20' -H 'Puz-Width: 23' --data-raw "ZZZZZZ...........ZZZZZZZ.....ZZZZZZZZZZZ.....Z.ZZZZZ...........ZZZZZ..Z...ZZZZZ...ZZZZZ...Z..Z...Z...ZZZZZ...Z...Z..Z...Z...Z...Z...Z...Z..ZZZ.Z...Z...Z...Z.ZZZ.Z..ZZZ...Z...Z...ZZZ..ZZZZ.ABCDEFGHIJKLMNO.ZZZZZZ.ZZZZZZ...ZZZZZZ.ZZZZZZ.Z.ZZZ.....ZZZ.Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.ZZ.Z.......Z.ZZ.ZZZZZZZ.ZZZ.......ZZZ.ZZZZZZZZZ..Z.ZZZZZ.Z..ZZZZZZZZZZ..ZZZ...ZZZ..ZZZZZZZZZZZ...........ZZZZZZ" -v  --insecure 
+  </code>
+</div>
+
+        <p>I put the letters A-O in the space of 81.. I knew what letter A would turn into.. I knew what letter B would turn into.. So I knew what letters went where .. <br><Br>RRR<b><u>B</u></b>RR...........RR<b><u>X</u></b>RRRR.....RR<b><u>T</u></b>RRRRRRRR.....R.RRRRR...........RRRRR..R...RRR<b><u>D</u></b>R...RRR<b><u>V</u></b>R...R..R...R...RRRRR...R...R..R...R...R...R...<b><u>G</u></b>...R..RRR.R...R...R...R.RRR.R..RRR...R...R...RRR..RRRR.RRRRRRR<b><u>U</u></b>RRRR<b><u>F</u></b>RR.RRRRRR.RRRRRR...RRRRRR.RRRRRR.R.RRR.....RRR.R.RRRRRR.R..R.......R..<b><u>W</u></b>.RRRRRR.R..R.......R..R.RR<b><u>Z</u></b>RR<b><u>A</u></b>.R..R.......R..R.RRRRRR.<b><u>S</u></b>..R.......R..R.RRRRRR.<b><u>C</u></b>R.R.......R.RR.<b><u>Y</u></b>RRRRRR.RRR.......RRR.RRRRRRRRR..R.RR<b><u>E</u></b>RR.R..RRRRRRRRRR..RRR...RRR..RRRRRRRRRRR...........RRRRRR
+<br><br>So.. the first word came out at RRRBRR. Now I knew if something came out as a B, it would have been put in as a J. That means the 10th letter in '81 across' would appear as the 4th letter in the first row. In the .puz file we got though, it was meant to come out as a Y, which means I needed to have a G in the tenth place.</p>
+        <p><img src='puz4.png'></p>
+        <p>So, using my code, I worked out what the letters were for 81 across.. and that gave me the flag!</p>
+ <code>  
+curl.exe 'http://puzzled.chal.cybears.io:5000/puz_encode' -H 'Content-type: application/octet-stream' -H 'Origin: http://puzzled.chal.cybears.io:5000/' -H 'Puz-Code: 5442' -H 'Puz-Height: 20' -H 'Puz-Width: 23' --data-raw "JJJJJJ...........JJJJJJJ.....ZZZZZZZZZZZ.....Z.ZZZZZ...........JJJJJ..Z...JJJJJ...JJJJJ...Z..Z...Z...HHHHH...Z...Z..Z...Z...Z...Z...Z...Z..ZZZ.Z...Z...Z...Z.ZZZ.Z..ZZZ...Z...Z...ZZZ..ZZZZ.ITSNOTALLGHIDRA.ZZZZZZ.ZZZZZZ...ZZZZZZ.ZZZZZZ.Z.ZZZ.....ZZZ.Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.Z..Z.......Z..Z.ZZZZZZ.ZZ.Z.......Z.ZZ.ZZZZZZZ.JJJ.......JJJ.ZZZZZZZZZ..Z.JJJJJ.Z..ZZZZZZZZZZ..ZZZ...ZZZ..ZZZZZZZZZZZ...........ZZZZZZ" -v  --insecure 
+
+  </code>
+</div>
+        
         <h2 id="fruity">A Fruity Dillema</h2>
         <p>boop</p>
 
